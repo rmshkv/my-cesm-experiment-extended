@@ -175,10 +175,13 @@ def setup_book():
     # check for files that are not computed
     # get list of computational notebooks
     compute_notebooks = [f"{f}.ipynb" for f in control["compute_notebooks"].keys()]
+    print(compute_notebooks)
 
     # get toc files; ignore glob expressions
     toc_files = get_toc_files(toc, include_glob=False)
     copy_files = list(set(toc_files) - set(compute_notebooks))
+    
+    print('copy files', copy_files)
 
     for src in copy_files:
         shutil.copyfile(src, f"{output_dir}/{src}")
@@ -214,6 +217,7 @@ def get_toc_files(toc_dict, include_glob=True):
                 for sub in value:
                     file_list_ext = _toc_files(sub, file_list_ext)
                 file_list.extend(file_list_ext)
+        print(file_list)
 
         return file_list
 
