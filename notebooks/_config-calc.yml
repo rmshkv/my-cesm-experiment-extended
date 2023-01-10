@@ -21,15 +21,14 @@ project: NCGD0011
 book_toc:
   format: jb-book
   root: description
-#  parts:
-#    - caption: Ocean Carbon Cycle
-#      chapters:
-#        - file: ocn-fgco2
-#    - caption: Ocean Tracers
-#      chapters:
-#        - file: intro-ocn-tracer-views
-#          sections:
-#            - glob: ocn-tracer-views*
+  parts:
+    - caption: Sea Surface Height
+      chapters:
+        - file: ssh
+    - caption: MOC
+      chapters:
+        - file: POP_MOC_extract_cat
+        - glob: moc-view*
 
 ###
 # book _config.yml keys
@@ -59,7 +58,39 @@ compute_notebooks:
     parameter_groups:  
       none:
         casename: *casename
+
+#  meridional_overturning:
+#    use_cluster: True
+#    kernel_name: mom6-tools-dev
+#    parameter_groups:  
+#      none:
+#        casename: *casename
+  POP_MOC_extract_cat:
+    use_cluster: True
+    kernel_name: diag-sandbox-moc-pop-tools
+    subset:
+      frequency: 'month_1'
+      component: 'ocn'
+      variable: 'MOC'
+    parameter_groups:  
+      none:
+        casename: *casename
        
+###
+# visualization + explanatory notebooks
+viz_notebooks:
+  moc-view:
+    use_cluster: True
+    kernel_name: diag-sandbox-moc-pop-tools
+    parameter_groups:
+      26n:
+        casename: *casename
+        cache_file_path: "/glade/u/home/eromashkova/codes/my-cesm-experiment-extended/notebooks/AMOC_series_26n.gcp-cases.nc"
+        title_param: "26n"
+      43n:
+        casename: *casename
+        cache_file_path: "/glade/u/home/eromashkova/codes/my-cesm-experiment-extended/notebooks/AMOC_series_45n.gcp-cases.nc"
+        title_param: "43n"
         
         
         
