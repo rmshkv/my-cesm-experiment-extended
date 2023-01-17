@@ -11,7 +11,7 @@ data_sources:
 
 ###
 # computation config keys
-output_dir: ./_computed-notebooks/*casename
+output_root: ./_computed-notebooks
 default_kernel_name: diag-sandbox
 project: NCGD0011
 
@@ -52,6 +52,7 @@ compute_notebooks:
   ssh:
     use_cluster: True
     subset:
+      case: 'g.e22.GOMIPECOIAF_JRA-1p4-2018.TL319_g17.GCB_2022.BCRD'
       frequency: 'month_1'
       component: 'ocn'
       variable: 'SSH'

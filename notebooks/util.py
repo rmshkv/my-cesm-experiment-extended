@@ -129,6 +129,7 @@ def get_control_dict():
     with open("_config-calc.yml", "r") as fid:
         control = yaml.safe_load(fid)
 
+    control["output_dir"] = f'{control["output_root"]}/{control["data_sources"]["casename"]}'
     os.makedirs(control["output_dir"], exist_ok=True)
 
     default_kernel_name = control.pop("default_kernel_name", None)
