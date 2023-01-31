@@ -7,7 +7,8 @@ data_sources:
     subset:
       case:
         - 'g.e22.GOMIPECOIAF_JRA-1p4-2018.TL319_g17.GCB_2022.BCRC'
-        - 'g.e22.GOMIPECOIAF_JRA-1p4-2018.TL319_g17.GCB_2022.BCRD'
+    cache_metadata_path: '/glade/u/home/eromashkova/codes/my-cesm-experiment-extended/notebooks/cache_metadata'
+    cache_data_path: '/glade/u/home/eromashkova/codes/my-cesm-experiment-extended/notebooks/cache_data'
 
 ###
 # computation config keys
@@ -27,7 +28,6 @@ book_toc:
         - file: ssh
     - caption: MOC
       chapters:
-        - file: POP_MOC_extract_cat
         - glob: moc-view*
 
 ###
@@ -52,7 +52,6 @@ compute_notebooks:
   ssh:
     use_cluster: True
     subset:
-      case: 'g.e22.GOMIPECOIAF_JRA-1p4-2018.TL319_g17.GCB_2022.BCRD'
       frequency: 'month_1'
       component: 'ocn'
       variable: 'SSH'
@@ -60,12 +59,6 @@ compute_notebooks:
       none:
         casename: *casename
 
-#  meridional_overturning:
-#    use_cluster: True
-#    kernel_name: mom6-tools-dev
-#    parameter_groups:  
-#      none:
-#        casename: *casename
   POP_MOC_extract_cat:
     use_cluster: True
     kernel_name: diag-sandbox-moc-pop-tools
@@ -77,21 +70,14 @@ compute_notebooks:
       none:
         casename: *casename
        
-###
-# visualization + explanatory notebooks
-viz_notebooks:
   moc-view:
     use_cluster: True
     kernel_name: diag-sandbox-moc-pop-tools
+    dependency: 'POP_MOC_extract_cat'
     parameter_groups:
       26n:
         casename: *casename
-        cache_file_path: "/glade/u/home/eromashkova/codes/my-cesm-experiment-extended/notebooks/AMOC_series_26n.gcp-cases.nc"
         title_param: "26n"
-      43n:
-        casename: *casename
-        cache_file_path: "/glade/u/home/eromashkova/codes/my-cesm-experiment-extended/notebooks/AMOC_series_45n.gcp-cases.nc"
-        title_param: "43n"
         
         
         
